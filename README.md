@@ -12,8 +12,12 @@ I don't know about other translation tools, but on [OmegaT](https://omegat.org/)
 
 You may run the script from the terminal with node, or you may import the functions `addTargetTags` and `generateTranslationFile` into a program of yours and use them from there.
 
+If you decide to run it as is from the terminal, you will need to inform the source file and the language code. For example, if you are in this project folder using the example file provided in this project, and you want to generate translation file for Portuguese:
+
+`node ./src/gtf.js messages.xlf pt`
+
+This will generated a file named `messages.pt.xlf`.
+
 Once you have your translation file with the target tags, you may use an application such as [OmegaT](https://omegat.org/) to translate the text within the target tags.
 
 I have done it so that the text from the source tag is repeated in the target tag.
-
-The script is the file `gtf.js`, in the `src` folder. The file `messages.xlf` is just an example
