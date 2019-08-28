@@ -58,4 +58,4 @@ if (module === require.main) {
     main();
 }
 
-module.exports = {generateTranslationFile, };
+module.exports = {addTargetTags, generateTranslationFile};
