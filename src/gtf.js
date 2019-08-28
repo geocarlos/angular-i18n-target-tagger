@@ -1,6 +1,10 @@
 const fs = require('fs');
 const assert = require('assert');
 
+/**
+ * Where your source file is located
+ * @param {String} filePath 
+ */
 async function addTargetTags(filePath) {
 
     try {
@@ -28,6 +32,12 @@ async function addTargetTags(filePath) {
     }
 }
 
+/**
+ * 
+ * @param {String} content This returned from addTargetTags 
+ * @param {String} filePath 
+ * @param {String} language Just the two-character code 
+ */
 async function generateTranslationFile(content, filePath, language) {
     try {
         assert(typeof(language) === 'string');

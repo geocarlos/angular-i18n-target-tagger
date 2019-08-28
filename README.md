@@ -9,3 +9,5 @@ You may run the script from the terminal with node, or you may import the functi
 Once you have your translation file with the target tags, you may use an application such as [OmegaT](https://omegat.org/) to translate the text within the target tags.
 
 I have done it so that the text from the source tag is repeated in the target tag.
+
+The script is the file `gtf.js`, in the `src` folder. The file `messages.xlf` is just an example
