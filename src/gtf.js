@@ -1,7 +1,7 @@
 const fs = require('fs');
 const assert = require('assert');
 
-async function addTargetFile(filePath) {
+async function addTargetTags(filePath) {
 
     try {
         const file = fs.readFileSync(filePath);
@@ -45,7 +45,7 @@ async function main() {
     const filePath = process.argv[2];
     const language = process.argv[3];
     try {
-        const contentWithTargetTags = await addTargetFile(filePath);
+        const contentWithTargetTags = await addTargetTags(filePath);
         process.stdout.write("Generating translation file...\n");
         await generateTranslationFile(contentWithTargetTags, filePath, language);
         process.stdout.write("Translation file generated\n");
@@ -58,4 +58,4 @@ if (module === require.main) {
     main();
 }
 
-module.exports = generateTranslationFile;
+module.exports = {generateTranslationFile, };
