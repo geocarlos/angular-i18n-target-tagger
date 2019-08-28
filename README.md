@@ -2,6 +2,12 @@
 
 This is a simple Node script to add target tags to Angular i18n XLF translation files.
 
+## Reason to write this script
+
+When extracting text for translation for an Angular application, I could not find an option to generate the translation file with `target` tags. If you find a way to do it, then, you don't need this script. Otherwise, it may be helpful. 
+
+I don't know about other translation tools, but on [OmegaT](https://omegat.org/), you may not load your translation file without the `target` tags. To copy, paste and rename the `source` tags manually is so cumbersome!
+
 ## How to use this script
 
 You may run the script from the terminal with node, or you may import the functions `addTargetTags` and `generateTranslationFile` into a program of yours and use them from there.
