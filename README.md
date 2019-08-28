@@ -1,4 +1,4 @@
-# Angular i18n Taget Tagger
+# Angular i18n Target Tagger
 
 This is a simple Node script to add target tags to Angular i18n XLF translation files.
 
