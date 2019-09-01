@@ -93,7 +93,6 @@ async function mergeContent(newContent, targetFileContent) {
         if (sn !== st) {
             transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(st, sn);
             const t = transUnitsTargetObj[unit].match(regTarget)[0];
-            console.log(t)
             transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(t, t.substring(0, t.indexOf('>') + 1)
                 + ' --may-need-update-- ' + t.substring(t.indexOf('>') + 1))
         }
