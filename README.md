@@ -2,6 +2,8 @@
 
 This is a simple Node script to add target tags to Angular i18n XLF translation files.
 
+Please note that it is for XLF format. If you need/want to use another format, you may have to look for another solution.
+
 ## Reason to write this script
 
 When extracting text for translation for an Angular application, I could not find an option to generate the translation file with `target` tags. If you find a way to do it, then, you don't need this script. Otherwise, it may be helpful. 
@@ -29,5 +31,3 @@ If you decide to run it as is from the terminal, you will need to inform the sou
 This will generated a file named `messages.pt.xlf`.
 
 Once you have your translation file with the target tags, you may use an application such as [OmegaT](https://omegat.org/) to translate the text within the target tags.
-
-I have done it so that the text from the source tag is repeated in the target tag.
