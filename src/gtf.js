@@ -10,29 +10,28 @@ async function addTargetTags(filePath) {
     try {
         const file = fs.readFileSync(filePath);
 
-        const reg = new RegExp(/<source>.+<\/source>/g);
-
-        const filePartsOtherThanSourceTags = file.toString().split(reg);
+        const reg = new RegExp(/(^(\s+|))<source>([\S\s]*?)<\/source>/gm);
 
         const sourceTags = file.toString().match(reg);
 
         const targetTags = [];
 
-        const fileContentWithTarget = [];
+        let fileContentWithTarget = file.toString();
 
         for (let l of sourceTags) {
             targetTags.push(l.replace(/<\/?source>/g, '<target>').replace(/<target>$/, '</target>'))
         }
 
-        for (let i = 0; i < filePartsOtherThanSourceTags.length; i++) {
-            fileContentWithTarget.push(
-                !!sourceTags[i] ? (filePartsOtherThanSourceTags[i] + sourceTags[i]
-                     + '\n        ' + targetTags[i]) :
-                filePartsOtherThanSourceTags[i]
+        for (let i = 0; i < sourceTags.length; i++) {
+            console.log(fileContentWithTarget);
+            fileContentWithTarget = fileContentWithTarget.replace(
+                sourceTags[i], `${sourceTags[i]}\n${targetTags[i]}`
             );
         }
 
-        return fileContentWithTarget.join('');
+        console.log(fileContentWithTarget);
+
+        return fileContentWithTarget;
     } catch (error) {
         if (!filePath) {
             throw new Error("Please inform a file to read from.")

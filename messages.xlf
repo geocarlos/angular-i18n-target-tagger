@@ -45,7 +45,10 @@
         </context-group>
       </trans-unit>
       <trans-unit id="372e243c4cba9882715e5cbe05707fa93da022a5" datatype="html">
-        <source>This is where I will put some content for the home page.</source>
+        <source>
+        This is where I will put some content 
+        for the home page.
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/homepage/home/home.component.html</context>
           <context context-type="linenumber">15</context>
