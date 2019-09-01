@@ -10,6 +10,16 @@ I don't know about other translation tools, but on [OmegaT](https://omegat.org/)
 
 ## How to use this script
 
+### With bash
+
+There is a shell script named `gtfl` in the folder `bin`. If you want to put it somewhere (I suggest your home directory) and run it from anywhere, you may add it to your `.bashrc` file, like this (assuming you have it in your home directory):
+
+`export PATH="$HOME/angular_i18n_target_tagger/bin:$PATH"`
+
+Now you may open a terminal and run the command `gtfl -h` from anywhere and see a message of how to use the script.
+
+### Directly with Node
+
 You may run the script from the terminal with node, or you may import the functions `addTargetTags` and `generateTranslationFile` into a program of yours and use them from there.
 
 If you decide to run it as is from the terminal, you will need to inform the source file and the language code. For example, if you are in this project folder using the example file provided in this project, and you want to generate translation file for Portuguese:
