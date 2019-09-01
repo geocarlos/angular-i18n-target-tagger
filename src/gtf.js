@@ -84,9 +84,6 @@ async function mergeContent(newContent, targetFileContent) {
         transUnitsTargetObj[t.substring(t.indexOf('=') + 2, t.indexOf('=') + 42)] = t;
     }
 
-    // console.log(transUnitsNewObj);
-    // console.log(transUnitsTargetObj);
-
     for (let unit in transUnitsNewObj) {
         const sn = transUnitsNewObj[unit].match(regSource)[0];
         const st = transUnitsTargetObj[unit].match(regSource)[0]
@@ -94,7 +91,7 @@ async function mergeContent(newContent, targetFileContent) {
             transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(st, sn);
             const t = transUnitsTargetObj[unit].match(regTarget)[0];
             transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(t, t.substring(0, t.indexOf('>') + 1)
-                + ' --may-need-update-- ' + t.substring(t.indexOf('>') + 1))
+                + '--needs-update-- ' + t.substring(t.indexOf('>') + 1))
         }
         newContent = newContent.replace(
             transUnitsNewObj[unit], transUnitsTargetObj[unit]
