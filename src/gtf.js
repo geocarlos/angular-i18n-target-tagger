@@ -23,7 +23,6 @@ async function addTargetTags(filePath) {
         }
 
         for (let i = 0; i < sourceTags.length; i++) {
-            console.log(fileContentWithTarget);
             fileContentWithTarget = fileContentWithTarget.replace(
                 sourceTags[i], `${sourceTags[i]}\n${targetTags[i]}`
             );
