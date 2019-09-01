@@ -46,6 +46,14 @@ async function generateTranslationFile(content, filePath, language) {
     try {
         assert(typeof (language) === 'string');
         const output = filePath.replace(/\./, `.${language}.`);
+        let targetFile = null;
+        try {
+            targetFile = fs.readFileSync(output);
+            process.stdout.write("Target file exists. New content will be merged.\n");
+            content = await mergeContent(content, targetFile.toString());
+        } catch (error) {
+            process.stdout.write("No target file exists. New file will be created.\n");
+        }
         fs.writeFileSync(output, content);
     } catch (error) {
         if (!language) {
@@ -55,6 +63,48 @@ async function generateTranslationFile(content, filePath, language) {
     }
 }
 
+async function mergeContent(newContent, targetFileContent) {
+
+    const regTransUnit = new RegExp(/(^(\s+|))<trans-unit ([\S\s]*?)<\/trans-unit>/gm);
+
+    const regTarget = new RegExp(/(^(\s+|))<target>([\S\s]*?)<\/target>/gm);
+    const regSource = new RegExp(/(^(\s+|))<source>([\S\s]*?)<\/source>/gm);
+
+    const transUnitsNew = newContent.match(regTransUnit);
+    const transUnitsTarget = targetFileContent.match(regTransUnit);
+
+    const transUnitsNewObj = {};
+    const transUnitsTargetObj = {}
+
+    for (let t of transUnitsNew) {
+        transUnitsNewObj[t.substring(t.indexOf('=') + 2, t.indexOf('=') + 42)] = t;
+    }
+
+    for (let t of transUnitsTarget) {
+        transUnitsTargetObj[t.substring(t.indexOf('=') + 2, t.indexOf('=') + 42)] = t;
+    }
+
+    // console.log(transUnitsNewObj);
+    // console.log(transUnitsTargetObj);
+
+    for (let unit in transUnitsNewObj) {
+        const sn = transUnitsNewObj[unit].match(regSource)[0];
+        const st = transUnitsTargetObj[unit].match(regSource)[0]
+        if (sn !== st) {
+            transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(st, sn);
+            const t = transUnitsTargetObj[unit].match(regTarget)[0];
+            console.log(t)
+            transUnitsTargetObj[unit] = transUnitsTargetObj[unit].replace(t, t.substring(0, t.indexOf('>') + 1)
+                + ' --may-need-update-- ' + t.substring(t.indexOf('>') + 1))
+        }
+        newContent = newContent.replace(
+            transUnitsNewObj[unit], transUnitsTargetObj[unit]
+        );
+    }
+    
+    return newContent;
+}
+
 async function main() {
     const filePath = process.argv[2];
     const language = process.argv[3];
@@ -62,9 +112,9 @@ async function main() {
         const contentWithTargetTags = await addTargetTags(filePath);
         process.stdout.write("Generating translation file...\n");
         await generateTranslationFile(contentWithTargetTags, filePath, language);
-        process.stdout.write("Translation file generated\n");
+        process.stdout.write("Translation file is ready.\n");
     } catch (error) {
-        process.stdout.write("An error has occurred\n", (error || {}).message);
+        process.stdout.write("An error has occurred.\n", (error || {}).message);
     }
 }
 
