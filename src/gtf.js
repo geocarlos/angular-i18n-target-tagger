@@ -16,8 +16,6 @@ async function addTargetTags(filePath) {
 
         const sourceTags = file.toString().match(reg);
 
-        console.log(sourceTags);
-
         const targetTags = [];
 
         const fileContentWithTarget = [];
@@ -33,8 +31,6 @@ async function addTargetTags(filePath) {
                 filePartsOtherThanSourceTags[i]
             );
         }
-
-        console.log(fileContentWithTarget);
 
         return fileContentWithTarget.join('');
     } catch (error) {
