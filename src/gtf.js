@@ -20,7 +20,7 @@ async function addTargetTags(filePath) {
 
         for (let tu of transUnits) {
             const sourceTag = tu.match(regSource)[0];
-            let targetTu = tu.replace(
+            const targetTu = tu.replace(
                 sourceTag,
                 `${sourceTag}\n${sourceTag.replace(/source>/g, 'target>')}`
             );
