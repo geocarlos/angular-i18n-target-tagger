@@ -10,7 +10,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="navbarAbout" datatype="html">
-        <source>About me</source>
+        <source>About</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/core/navbar/navbar.component.html</context>
           <context context-type="linenumber">7</context>
