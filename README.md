@@ -31,3 +31,18 @@ If you decide to run it as is from the terminal, you will need to inform the sou
 This will generated a file named `messages.pt.xlf`.
 
 Once you have your translation file with the target tags, you may use an application such as [OmegaT](https://omegat.org/) to translate the text within the target tags.
+
+## Merging existing translation
+
+In order to merge your existing translation, you must set custom ids for your translated string, since automatically generated ids will be overwritten when you run `ng xi18n` on your project again.
+
+This is script will check if the location already has a file for the language you have informed. If so, then it will merge the existing translations within the target tags.
+
+If you have modified the original text (for instance, you decided to change "About" to "About me" or "About us"), the script will keep the existing translation and mark it with `--needs-update`, like this:
+
+`<source>About me</source>`  
+`<target>--needs-update-- Sobre</target>`
+
+In this case, the translator would delete `--needs-update--` and update the translation to something like:
+
+`<target>Sobre mim</target>`
