@@ -28,8 +28,6 @@ async function addTargetTags(filePath) {
             );
         }
 
-        console.log(fileContentWithTarget);
-
         return fileContentWithTarget;
     } catch (error) {
         if (!filePath) {
