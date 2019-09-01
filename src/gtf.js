@@ -14,17 +14,12 @@ async function addTargetTags(filePath) {
 
         const sourceTags = file.toString().match(reg);
 
-        const targetTags = [];
-
         let fileContentWithTarget = file.toString();
-
-        for (let l of sourceTags) {
-            targetTags.push(l.replace(/<\/?source>/g, '<target>').replace(/<target>$/, '</target>'))
-        }
 
         for (let i = 0; i < sourceTags.length; i++) {
             fileContentWithTarget = fileContentWithTarget.replace(
-                sourceTags[i], `${sourceTags[i]}\n${targetTags[i]}`
+                sourceTags[i], 
+                `${sourceTags[i]}\n${sourceTags[i].match(reg)[0].replace(/source>/g, 'target>')}`
             );
         }
 
