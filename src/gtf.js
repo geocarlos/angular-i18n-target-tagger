@@ -10,17 +10,21 @@ async function addTargetTags(filePath) {
     try {
         const file = fs.readFileSync(filePath);
 
-        const reg = new RegExp(/(^(\s+|))<source>([\S\s]*?)<\/source>/gm);
+        const regTransUnit = new RegExp(/(^(\s+|))<trans-unit ([\S\s]*?)<\/trans-unit>/gm);
 
-        const sourceTags = file.toString().match(reg);
+        const regSource = new RegExp(/(^(\s+|))<source>([\S\s]*?)<\/source>/gm);
+
+        const transUnits = file.toString().match(regTransUnit);
 
         let fileContentWithTarget = file.toString();
 
-        for (let i = 0; i < sourceTags.length; i++) {
-            fileContentWithTarget = fileContentWithTarget.replace(
-                sourceTags[i], 
-                `${sourceTags[i]}\n${sourceTags[i].match(reg)[0].replace(/source>/g, 'target>')}`
+        for (let tu of transUnits) {
+            const sourceTag = tu.match(regSource)[0];
+            let targetTu = tu.replace(
+                sourceTag,
+                `${sourceTag}\n${sourceTag.replace(/source>/g, 'target>')}`
             );
+            fileContentWithTarget = fileContentWithTarget.replace(tu, targetTu);
         }
 
         return fileContentWithTarget;
@@ -92,7 +96,7 @@ async function mergeContent(newContent, targetFileContent) {
             transUnitsNewObj[unit], transUnitsTargetObj[unit]
         );
     }
-    
+
     return newContent;
 }
 
