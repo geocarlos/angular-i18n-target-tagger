@@ -10,21 +10,33 @@ async function addTargetTags(filePath) {
     try {
         const file = fs.readFileSync(filePath);
 
-        const fileLines = file.toString().split('\n');
+        const reg = new RegExp(/<source>.+<\/source>/g);
 
-        const fileLinesWithTarget = [];
+        const filePartsOtherThanSourceTags = file.toString().split(reg);
 
-        const reg = new RegExp(/<source>.+<\/source>/);
+        const sourceTags = file.toString().match(reg);
 
-        for (let l of fileLines) {
+        console.log(sourceTags);
 
-            fileLinesWithTarget.push(l);
+        const targetTags = [];
 
-            if (reg.test(l)) {
-                fileLinesWithTarget.push(l.replace(/<\/?source>/g, '<target>').replace(/<target>$/, '</target>'))
-            }
+        const fileContentWithTarget = [];
+
+        for (let l of sourceTags) {
+            targetTags.push(l.replace(/<\/?source>/g, '<target>').replace(/<target>$/, '</target>'))
         }
-        return fileLinesWithTarget.join('\n');
+
+        for (let i = 0; i < filePartsOtherThanSourceTags.length; i++) {
+            fileContentWithTarget.push(
+                !!sourceTags[i] ? (filePartsOtherThanSourceTags[i] + sourceTags[i]
+                     + '\n        ' + targetTags[i]) :
+                filePartsOtherThanSourceTags[i]
+            );
+        }
+
+        console.log(fileContentWithTarget);
+
+        return fileContentWithTarget.join('');
     } catch (error) {
         if (!filePath) {
             throw new Error("Please inform a file to read from.")
@@ -40,7 +52,7 @@ async function addTargetTags(filePath) {
  */
 async function generateTranslationFile(content, filePath, language) {
     try {
-        assert(typeof(language) === 'string');
+        assert(typeof (language) === 'string');
         const output = filePath.replace(/\./, `.${language}.`);
         fs.writeFileSync(output, content);
     } catch (error) {
@@ -68,4 +80,4 @@ if (module === require.main) {
     main();
 }
 
-module.exports = {addTargetTags, generateTranslationFile};
+module.exports = { addTargetTags, generateTranslationFile };
