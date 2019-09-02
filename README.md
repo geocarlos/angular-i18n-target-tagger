@@ -12,13 +12,11 @@ I don't know about other translation tools, but on [OmegaT](https://omegat.org/)
 
 ## How to use this script
 
-### With bash
+### With batch script
 
-There is a shell script named `gtfl` in the folder `bin`. If you want to put it somewhere (I suggest your home directory) and run it from anywhere, you may add it to your `.bashrc` file, like this (assuming you have it in your home directory):
+There is a batch script named `gtfl.cmd` in the folder `bin`. If you want to put it somewhere (I suggest your Documents directory) and run it from anywhere, you may add its folder (bin) to your environment variable `PATH`. If you have this project folder somewhere other than Documents, you will need to make some adjustments according to your directory.
 
-`export PATH="$HOME/angular_i18n_target_tagger/bin:$PATH"`
-
-Now you may open a terminal and run the command `gtfl -h` from anywhere and see a message of how to use the script.
+If you add it to `PATH`, you may open a terminal and run the command `gtfl --help` from anywhere and see a message of how to use the script. In my tests, I was able to run it from PowerShell, but it failed running from CMD (and I haven't bothered trying to find out why). So, just run it from PowerShell.
 
 ### Directly with Node
 
