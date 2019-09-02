@@ -84,6 +84,9 @@ async function mergeContent(newContent, targetFileContent) {
     }
 
     for (let unit in transUnitsNewObj) {
+        if(!transUnitsTargetObj[unit]){
+            continue;
+        }
         const sn = transUnitsNewObj[unit].match(regSource)[0];
         const st = transUnitsTargetObj[unit].match(regSource)[0]
         if (sn !== st) {
