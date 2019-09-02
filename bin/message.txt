@@ -1,0 +1,12 @@
+ ------------------------------HELP--------------------------------
+    You need to provide two arguments:    
+    1: the file with your source language and the file for translation;
+    2: the language you for the translation file want to generate.
+    Example:
+    Say you have a file \"messages.xlf\" and you want to generate 
+    a translation file for Portuguese. Assuming you are in the same 
+    folder as the file, this is the command you need to issue:
+    gtfl messages.xlf pt
+    A file named messages.pt.xlf should be generated with target tags
+    below the source tags.
+--------------------------------------------------------------------

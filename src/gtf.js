@@ -22,7 +22,7 @@ async function addTargetTags(filePath) {
             const sourceTag = tu.match(regSource)[0];
             const targetTu = tu.replace(
                 sourceTag,
-                `${sourceTag}\n${sourceTag.replace(/source>/g, 'target>')}`
+                `${sourceTag}${sourceTag.replace(/source>/g, 'target>')}`
             );
             fileContentWithTarget = fileContentWithTarget.replace(tu, targetTu);
         }
@@ -76,11 +76,11 @@ async function mergeContent(newContent, targetFileContent) {
     const transUnitsTargetObj = {}
 
     for (let t of transUnitsNew) {
-        transUnitsNewObj[t.match(/(?!id=)"\w+"/)[0]] = t;
+        transUnitsNewObj[t.match(/(?!id=")\w+(?=["])/)[0]] = t;
     }
 
     for (let t of transUnitsTarget) {
-        transUnitsTargetObj[t.match(/(?!id=)"\w+"/)[0]] = t;
+        transUnitsTargetObj[t.match(/(?!id=")\w+(?=["])/)[0]] = t;
     }
 
     for (let unit in transUnitsNewObj) {
