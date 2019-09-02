@@ -20,6 +20,8 @@ There is a shell script named `gtfl` in the folder `bin`. If you want to put it 
 
 Now you may open a terminal and run the command `gtfl -h` from anywhere and see a message of how to use the script.
 
+_NOTE: If you are on Windows 10, you may want to check the [windows10](https://github.com/geocarlos/angular-i18n-target-tagger/tree/windows10) branch._
+
 ### Directly with Node
 
 You may run the script from the terminal with node, or you may import the functions `addTargetTags` and `generateTranslationFile` into a program of yours and use them from there.
