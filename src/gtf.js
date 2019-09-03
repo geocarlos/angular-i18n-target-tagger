@@ -68,6 +68,7 @@ async function mergeContent(newContent, targetFileContent) {
 
     const regTarget = new RegExp(/(^(\s+|))<target>([\S\s]*?)<\/target>/gm);
     const regSource = new RegExp(/(^(\s+|))<source>([\S\s]*?)<\/source>/gm);
+    const regId = new RegExp(/(?!id=")\w+(?=["])/);
 
     const transUnitsNew = newContent.match(regTransUnit);
     const transUnitsTarget = targetFileContent.match(regTransUnit);
@@ -76,11 +77,11 @@ async function mergeContent(newContent, targetFileContent) {
     const transUnitsTargetObj = {}
 
     for (let t of transUnitsNew) {
-        transUnitsNewObj[t.match(/(?!id=")\w+(?=["])/)[0]] = t;
+        transUnitsNewObj[t.match(regId)[0]] = t;
     }
 
     for (let t of transUnitsTarget) {
-        transUnitsTargetObj[t.match(/(?!id=")\w+(?=["])/)[0]] = t;
+        transUnitsTargetObj[t.match(regId)[0]] = t;
     }
 
     for (let unit in transUnitsNewObj) {
